@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/DTO" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/DTO" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="DTO_Account">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Active" type="xs:boolean" />
+      <xs:element minOccurs="0" name="ID" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Phone" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="city" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="create_date" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="email" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="state" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="street" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="zip" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DTO_Account" nillable="true" type="tns:DTO_Account" />
+  <xs:complexType name="ArrayOfDTO_Customer">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DTO_Customer" nillable="true" type="tns:DTO_Customer" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDTO_Customer" nillable="true" type="tns:ArrayOfDTO_Customer" />
+  <xs:complexType name="DTO_Customer">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AccountID" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Active" type="xs:boolean" />
+      <xs:element minOccurs="0" name="GroupID" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Phone" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DTO_Customer" nillable="true" type="tns:DTO_Customer" />
+  <xs:complexType name="DTO_SMS">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Alphabet" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Index" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Sender" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Sent" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Status" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DTO_SMS" nillable="true" type="tns:DTO_SMS" />
+  <xs:complexType name="ArrayOfDTO_Schedule">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DTO_Schedule" nillable="true" type="tns:DTO_Schedule" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDTO_Schedule" nillable="true" type="tns:ArrayOfDTO_Schedule" />
+  <xs:complexType name="DTO_Schedule">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AccountID" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Active" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Date" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="ID" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SMS_info" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Time" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DTO_Schedule" nillable="true" type="tns:DTO_Schedule" />
+  <xs:complexType name="ArrayOfDTO_Group">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DTO_Group" nillable="true" type="tns:DTO_Group" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDTO_Group" nillable="true" type="tns:ArrayOfDTO_Group" />
+  <xs:complexType name="DTO_Group">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AccountID" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Group_Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ID" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Phone" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DTO_Group" nillable="true" type="tns:DTO_Group" />
+  <xs:complexType name="ArrayOfDTO_SMS_Template">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DTO_SMS_Template" nillable="true" type="tns:DTO_SMS_Template" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDTO_SMS_Template" nillable="true" type="tns:ArrayOfDTO_SMS_Template" />
+  <xs:complexType name="DTO_SMS_Template">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Account" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ID" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SMS_Template" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DTO_SMS_Template" nillable="true" type="tns:DTO_SMS_Template" />
+</xs:schema>

@@ -1,0 +1,553 @@
+﻿<Page x:Name="PageSendSMS" x:Class="SMS_Client.SendSMS"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:SMS_Client"
+      mc:Ignorable="d" 
+      d:DesignHeight="300" d:DesignWidth="300"
+      Title="SendSMS" Width="860" Height="560" Background="White" Loaded="PageSendSMS_Loaded">
+    <Page.Resources>
+        <Style x:Key="FocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="2" SnapsToDevicePixels="true" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="DataGridStyle1" TargetType="{x:Type DataGrid}">
+            <Setter Property="ColumnHeaderStyle" Value="{DynamicResource ColumnHeaderStyle1}"/>
+        </Style>
+        <Style x:Key="DataGridCellStyle">
+            <Setter Property="DataGridCell.BorderThickness" Value="0 0 1 0" />
+            <Setter Property="DataGridCell.BorderBrush" Value="Transparent" />
+        </Style>
+        <!-- DataGridColumnHeader style -->
+        <Style x:Key="ColumnHeaderStyle1" TargetType="DataGridColumnHeader">
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Background" Value="Black"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="ToolTip" Value="Click to sort."/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <SolidColorBrush x:Key="Item.MouseOver.Background" Color="#1F26A0DA"/>
+        <SolidColorBrush x:Key="Item.MouseOver.Border" Color="#a826A0Da"/>
+        <SolidColorBrush x:Key="Item.SelectedInactive.Background" Color="#3DDADADA"/>
+        <SolidColorBrush x:Key="Item.SelectedInactive.Border" Color="#FFDADADA"/>
+        <SolidColorBrush x:Key="Item.SelectedActive.Background" Color="#3D26A0DA"/>
+        <SolidColorBrush x:Key="Item.SelectedActive.Border" Color="#FF26A0DA"/>
+
+        <SolidColorBrush x:Key="Button.Static.Background" Color="#FFDDDDDD"/>
+        <SolidColorBrush x:Key="Button.Static.Border" Color="#FF707070"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FFBEE6FD"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#FF3C7FB1"/>
+        <SolidColorBrush x:Key="Button.Pressed.Background" Color="#FFC4E5F6"/>
+        <SolidColorBrush x:Key="Button.Pressed.Border" Color="#FF2C628B"/>
+        <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4"/>
+        <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5"/>
+        <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
+        <Style x:Key="ButtonStyle1" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <ControlTemplate.Resources>
+                            <Storyboard x:Key="Storyboard1">
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="path">
+                                    <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1.1"/>
+                                </DoubleAnimationUsingKeyFrames>
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="path">
+                                    <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1.1"/>
+                                </DoubleAnimationUsingKeyFrames>
+                            </Storyboard>
+                            <Storyboard x:Key="Storyboard2">
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="path">
+                                    <EasingDoubleKeyFrame KeyTime="0" Value="1.1"/>
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1"/>
+                                </DoubleAnimationUsingKeyFrames>
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="path">
+                                    <EasingDoubleKeyFrame KeyTime="0" Value="1.1"/>
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1"/>
+                                </DoubleAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </ControlTemplate.Resources>
+                        <Path x:Name="path" Width="Auto" Height="Auto" Stretch="Fill" Fill="#8B005C8A" Data="M 264.248,12.8463C 274.737,12.8463 283.242,21.347 283.242,31.83C 283.242,42.313 274.737,50.8137 264.248,50.8137C 253.759,50.8137 245.253,42.313 245.253,31.83C 245.253,21.347 253.759,12.8463 264.248,12.8463 Z M 255.437,41.4362L 262.874,31.4869L 256.352,22.2239L 259.365,22.2239L 262.874,27.1412C 263.599,28.1705 264.095,28.933 264.4,29.5048C 264.82,28.8186 265.354,28.0942 265.926,27.3319L 269.778,22.2239L 272.563,22.2239L 265.888,31.3726L 273.058,41.4362L 269.931,41.4362L 265.087,34.6128C 264.82,34.1935 264.553,33.8123 264.286,33.431C 263.866,34.0791 263.561,34.5365 263.37,34.7653L 258.526,41.4362L 255.437,41.4362 Z " Margin="0,0,2.035,0.001" Cursor="Hand" RenderTransformOrigin="0.5,0.5">
+                            <Path.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </Path.RenderTransform>
+                        </Path>
+                        <ControlTemplate.Triggers>
+                            <EventTrigger RoutedEvent="UIElement.MouseEnter" SourceName="path">
+                                <BeginStoryboard Storyboard="{StaticResource Storyboard1}"/>
+                            </EventTrigger>
+                            <EventTrigger RoutedEvent="UIElement.MouseLeave" SourceName="path">
+                                <BeginStoryboard x:Name="Storyboard2_BeginStoryboard" Storyboard="{StaticResource Storyboard2}"/>
+                            </EventTrigger>
+                            <Trigger Property="IsDefaulted" Value="true"/>
+                            <Trigger Property="IsMouseOver" Value="true"/>
+                            <Trigger Property="IsPressed" Value="true"/>
+                            <Trigger Property="IsEnabled" Value="false"/>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="lv_template" TargetType="{x:Type ListViewItem}">
+            <Setter Property="SnapsToDevicePixels" Value="True"/>
+            <Setter Property="Padding" Value="4,1"/>
+            <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+            <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ListViewItem}">
+                        <ControlTemplate.Resources>
+                            <Storyboard x:Key="Storyboard1">
+                                <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="path">
+                                    <EasingColorKeyFrame KeyTime="0" Value="#FF8B8B8B"/>
+                                    <EasingColorKeyFrame KeyTime="0:0:0.4" Value="White"/>
+                                </ColorAnimationUsingKeyFrames>
+                            </Storyboard>
+                            <Storyboard x:Key="Storyboard2">
+                                <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="path">
+                                    <EasingColorKeyFrame KeyTime="0" Value="White"/>
+                                    <EasingColorKeyFrame KeyTime="0:0:0.3" Value="#FF8B8B8B"/>
+                                </ColorAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </ControlTemplate.Resources>
+                        <Viewbox Height="33.137" Margin="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="151.08">
+                            <Canvas x:Name="canvas" Width="290.413" Height="63.6981">
+                                <Path x:Name="path" Width="290.413" Height="63.6981" Canvas.Left="0" Canvas.Top="0" Stretch="Fill" Fill="#FF8B8B8B" Data="M 31.8486,0L 258.564,0C 276.072,0 290.413,14.333 290.413,31.83L 290.413,31.83C 290.413,49.3651 276.072,63.6981 258.564,63.6981L 31.8486,63.6981C 14.3414,63.6981 0,49.3651 0,31.83L 0,31.83C 0,14.333 14.3414,0 31.8486,0 Z "/>
+                                <TextBlock x:Name="txt_phone" TextAlignment="Left" FontFamily="Century Gothic" FontSize="24.4734" VerticalAlignment="Top" HorizontalAlignment="Left">
+                                    <TextBlock.RenderTransform>
+                                        <TransformGroup>
+                                            <MatrixTransform Matrix="1.33333,0,0,1.33333,25.8698,9.87751"/>
+                                        </TransformGroup>
+                                    </TextBlock.RenderTransform><Run Text="{Binding Phone}" Foreground="#FF221F20"/></TextBlock>
+                                <Button x:Name="button" Content="Button" Height="37.968" Canvas.Left="243.218" Canvas.Top="12.846" Width="40.024" Style="{DynamicResource ButtonStyle1}"/>
+                            </Canvas>
+                        </Viewbox>
+                        <ControlTemplate.Triggers>
+                            <EventTrigger RoutedEvent="UIElement.MouseEnter" SourceName="canvas">
+                                <BeginStoryboard Storyboard="{StaticResource Storyboard1}"/>
+                            </EventTrigger>
+                            <EventTrigger RoutedEvent="UIElement.MouseLeave" SourceName="canvas">
+                                <BeginStoryboard x:Name="Storyboard2_BeginStoryboard" Storyboard="{StaticResource Storyboard2}"/>
+                            </EventTrigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsMouseOver" Value="True"/>
+                                </MultiTrigger.Conditions>
+                            </MultiTrigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="Selector.IsSelectionActive" Value="False"/>
+                                    <Condition Property="IsSelected" Value="True"/>
+                                </MultiTrigger.Conditions>
+                            </MultiTrigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="Selector.IsSelectionActive" Value="True"/>
+                                    <Condition Property="IsSelected" Value="True"/>
+                                </MultiTrigger.Conditions>
+                            </MultiTrigger>
+                            <Trigger Property="IsEnabled" Value="False"/>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ButtonStyle3" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Canvas HorizontalAlignment="Stretch" Height="Auto" Margin="0" VerticalAlignment="Stretch" Width="Auto">
+                            <Viewbox Height="20.83" Width="117.071" Canvas.Left="49.352" Canvas.Top="5.822">
+                                <Canvas Width="117.071" Height="20.8301">
+                                    <Path Width="19.4069" Height="20.1581" Canvas.Left="-1.52588e-005" Canvas.Top="0.287964" Stretch="Fill" Fill="#FF349CE0" Data="F1 M 10.0117,0.287964L 19.4069,20.446L 17.2326,20.446L 14.0634,13.8136L 5.38435,13.8136L 2.24654,20.446L -1.52588e-005,20.446L 9.5182,0.287964L 10.0117,0.287964 Z M 9.75767,4.57101L 6.30586,11.8675L 13.1936,11.8675L 9.75767,4.57101 Z "/>
+                                    <Path Width="15.1612" Height="15.6773" Canvas.Left="21.0108" Canvas.Top="5.15271" Stretch="Fill" Fill="#FF349CE0" Data="F1 M 36.1719,8.63379L 34.6517,9.57916C 33.3392,7.83411 31.5467,6.96216 29.2753,6.96216C 27.4614,6.96216 25.9546,7.54614 24.7551,8.71393C 23.5555,9.8819 22.9557,11.3006 22.9557,12.971C 22.9557,14.0565 23.2314,15.0787 23.7838,16.0365C 24.3349,16.9954 25.0916,17.7387 26.054,18.2683C 27.0163,18.7969 28.0938,19.0624 29.2888,19.0624C 31.4778,19.0624 33.2658,18.1893 34.6517,16.4442L 36.1719,17.445C 35.4604,18.518 34.5025,19.3504 33.303,19.9422C 32.1013,20.5342 30.7345,20.83 29.2008,20.83C 26.8447,20.83 24.8906,20.0812 23.3387,18.5824C 21.7868,17.0846 21.0108,15.2617 21.0108,13.1145C 21.0108,11.671 21.3734,10.3303 22.0996,9.09235C 22.8258,7.85449 23.8232,6.88873 25.0916,6.19409C 26.3612,5.50058 27.781,5.15271 29.3521,5.15271C 30.337,5.15271 31.2903,5.30405 32.2075,5.60455C 33.1245,5.90607 33.9028,6.29907 34.5421,6.78369C 35.1815,7.26816 35.7247,7.88486 36.1719,8.63379 Z "/>
+                                    <Path Width="15.1624" Height="15.6773" Canvas.Left="39.2689" Canvas.Top="5.15271" Stretch="Fill" Fill="#FF349CE0" Data="F1 M 54.4313,8.63379L 52.9111,9.57916C 51.5974,7.83411 49.8049,6.96216 47.5346,6.96216C 45.7195,6.96216 44.2129,7.54614 43.0132,8.71393C 41.8149,9.8819 41.214,11.3006 41.214,12.971C 41.214,14.0565 41.4897,15.0787 42.0419,16.0365C 42.5942,16.9954 43.3509,17.7387 44.3134,18.2683C 45.2757,18.7969 46.3531,19.0624 47.5481,19.0624C 49.7371,19.0624 51.5239,18.1893 52.9111,16.4442L 54.4313,17.445C 53.7186,18.518 52.762,19.3504 51.5623,19.9422C 50.3606,20.5342 48.9939,20.83 47.4602,20.83C 45.104,20.83 43.1499,20.0812 41.598,18.5824C 40.0461,17.0846 39.2689,15.2617 39.2689,13.1145C 39.2689,11.671 39.6327,10.3303 40.3578,9.09235C 41.0853,7.85449 42.0815,6.88873 43.3509,6.19409C 44.6205,5.50058 46.0393,5.15271 47.6104,5.15271C 48.5964,5.15271 49.5484,5.30405 50.4668,5.60455C 51.3839,5.90607 52.161,6.29907 52.8004,6.78369C 53.4396,7.26816 53.984,7.88486 54.4313,8.63379 Z "/>
+                                    <Path Width="15.5451" Height="15.6773" Canvas.Left="57.5013" Canvas.Top="5.15271" Stretch="Fill" Fill="#FF349CE0" Data="F1 M 65.2812,5.15271C 67.5763,5.15271 69.4784,5.98401 70.9885,7.64661C 72.3609,9.16351 73.0464,10.9583 73.0464,13.032C 73.0464,15.1148 72.3213,16.9355 70.8722,18.4931C 69.422,20.0507 67.5583,20.83 65.2812,20.83C 62.9939,20.83 61.1258,20.0507 59.6767,18.4931C 58.2265,16.9355 57.5013,15.1148 57.5013,13.032C 57.5013,10.9673 58.1881,9.17706 59.5592,7.66016C 61.0682,5.98853 62.9759,5.15271 65.2812,5.15271 Z M 65.2744,7.02991C 63.6796,7.02991 62.3094,7.61945 61.1642,8.79755C 60.019,9.97675 59.4463,11.4023 59.4463,13.0739C 59.4463,14.1514 59.7083,15.1565 60.2301,16.0884C 60.752,17.0203 61.4579,17.7397 62.3469,18.2469C 63.2345,18.754 64.2104,19.007 65.2744,19.007C 66.3361,19.007 67.3119,18.754 68.2021,18.2469C 69.0898,17.7397 69.7958,17.0203 70.3187,16.0884C 70.8406,15.1565 71.1015,14.1514 71.1015,13.0739C 71.1015,11.4023 70.5266,9.97675 69.3767,8.79755C 68.2268,7.61945 66.8591,7.02991 65.2744,7.02991 Z "/>
+                                    <Path Width="13.0389" Height="15.2932" Canvas.Left="76.2621" Canvas.Top="5.5368" Stretch="Fill" Fill="#FF349CE0" Data="F1 M 76.2621,5.5368L 78.18,5.5368L 78.18,12.4978C 78.18,14.1976 78.2715,15.3667 78.4545,16.006C 78.7289,16.9198 79.2519,17.6415 80.0244,18.1712C 80.797,18.7009 81.7187,18.9664 82.7883,18.9664C 83.8579,18.9664 84.7649,18.7078 85.5104,18.1916C 86.2558,17.6754 86.771,16.9976 87.0545,16.1573C 87.2464,15.5812 87.3424,14.3614 87.3424,12.4978L 87.3424,5.5368L 89.301,5.5368L 89.301,12.8547C 89.301,14.9092 89.0615,16.4577 88.5815,17.5003C 88.1026,18.5417 87.3808,19.356 86.4186,19.9457C 85.4539,20.5352 84.2476,20.83 82.7952,20.83C 81.3438,20.83 80.1318,20.5352 79.1593,19.9457C 78.1868,19.356 77.4616,18.5349 76.9816,17.4789C 76.5015,16.4238 76.2621,14.837 76.2621,12.717L 76.2621,5.5368 Z "/>
+                                    <Path Width="12.9982" Height="15.2933" Canvas.Left="93.4756" Canvas.Top="5.15271" Stretch="Fill" Fill="#FF349CE0" Data="F1 M 93.4756,5.5368L 95.3934,5.5368L 95.3934,8.20911C 96.1604,7.18573 97.0097,6.41992 97.9416,5.9129C 98.8722,5.40692 99.8866,5.15271 100.982,5.15271C 102.096,5.15271 103.083,5.43613 103.946,6.00208C 104.809,6.569 105.446,7.33148 105.857,8.29041C 106.268,9.25049 106.474,10.7437 106.474,12.7722L 106.474,20.446L 104.556,20.446L 104.556,13.3336C 104.556,11.6168 104.485,10.4703 104.342,9.89423C 104.12,8.90714 103.694,8.16504 103.065,7.66702C 102.435,7.16998 101.612,6.92041 100.598,6.92041C 99.4393,6.92041 98.4001,7.30438 97.4831,8.07138C 96.5647,8.83936 95.9605,9.78925 95.6668,10.9221C 95.4849,11.662 95.3934,13.014 95.3934,14.9781L 95.3934,20.446L 93.4756,20.446L 93.4756,5.5368 Z "/>
+                                    <Path Width="7.57437" Height="20.446" Canvas.Left="109.496" Canvas.Top="3.05176e-005" Stretch="Fill" Fill="#FF349CE0" Data="F1 M 112.112,3.05176e-005L 114.03,3.05176e-005L 114.03,5.5368L 117.071,5.5368L 117.071,7.19489L 114.03,7.19489L 114.03,20.446L 112.112,20.446L 112.112,7.19489L 109.496,7.19489L 109.496,5.5368L 112.112,5.5368L 112.112,3.05176e-005 Z "/>
+                                </Canvas>
+                            </Viewbox>
+                            <Path Stretch="Fill" Fill="#FF349CE0" Data="M 46.7521,495.389C 42.8507,495.389 41.736,493.553 40.9492,493.323L 40.9492,493.094C 42.654,492.7 42.9163,492.045 43.0146,490.897C 44.8179,492.11 46.621,492.635 48.752,491.717L 50.3913,490.897C 50.3913,491.749 50.3258,492.077 50.883,492.438C 51.2109,492.635 51.9651,493.028 52.4568,493.094C 51.6372,494.307 48.752,495.389 46.7521,495.389 Z M 49.965,501.454L 44.1293,501.454C 41.0147,501.388 38.1952,501.159 36.4248,500.864C 31.0807,499.979 30.3266,497.979 33.474,494.372C 33.7035,494.11 33.7362,494.11 34.0314,493.881C 35.8018,492.405 37.5394,492.569 40.1294,491.749C 40.5885,491.586 41.3425,491.487 41.3425,491.028C 41.3425,488.34 41.4081,489.881 40.3589,487.75C 40.195,487.422 40.0967,487.225 39.9656,486.864C 39.8016,486.405 39.8672,486.307 39.5721,485.946C 38.2608,484.34 37.9984,483.881 37.9984,481.356C 37.9984,480.865 38.1623,480.865 38.2935,480.471C 38.4574,480.012 38.3263,478.504 38.5558,477.258C 39.0803,474.045 42.1293,470.504 45.7359,470.504L 47.4078,470.504C 51.9651,470.504 55.1124,474.963 54.8502,479.914C 54.8173,480.996 55.2764,480.373 55.2764,481.586C 55.2764,483.75 54.9157,484.537 53.7026,485.946C 53.342,486.34 53.342,486.963 52.8831,487.848C 52.6863,488.209 51.9322,489.258 51.9322,489.454C 51.9322,491.684 51.4404,491.323 54.9813,492.241C 57.2107,492.799 58.9484,492.963 60.522,495.192C 61.9974,497.323 62.4236,499.061 59.7352,500.11C 57.6697,500.929 53.9322,501.323 49.965,501.454 Z M 48.8176,478.635C 49.2111,479.061 50.0306,479.75 50.5553,480.143C 51.1783,480.635 51.8339,481.029 52.6863,481.225L 53.0469,480.668C 53.2437,480.406 53.0798,480.602 53.2108,480.438C 53.2108,480.832 53.1453,480.897 53.0798,481.225C 53.7682,481.225 53.7355,481.225 53.7355,481.979C 53.7355,482.93 53.2764,484.307 52.719,484.701C 52.3913,484.963 52.424,484.799 52.2273,485.127C 52.0962,485.291 52.0307,485.651 51.9651,485.914C 51.6044,487.225 50.7192,488.569 49.7029,489.422C 46.3586,492.274 42.4245,489.881 41.1458,485.422C 40.9163,484.635 41.3097,485.225 40.7196,484.799C 39.7361,484.11 39.5393,482.897 39.5393,481.586C 39.5393,481.094 39.5065,481.553 39.6705,481.225L 40.195,481.225C 40.2278,481.717 40.5229,482.799 40.818,483.029C 40.818,481.324 40.8836,479.258 41.9654,478.078C 42.4245,477.586 42.6867,477.619 43.2769,477.357C 44.2605,478.799 48.2602,481.061 50.1291,481.225L 48.8176,478.635 Z " Height="30.95" Width="30.08"/>
+                            <Rectangle Fill="#FF349CE0" HorizontalAlignment="Stretch" Height="30.269" Margin="0" VerticalAlignment="Stretch" Width="167.787" Opacity="0"/>
+                        </Canvas>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true"/>
+                            <Trigger Property="IsMouseOver" Value="true"/>
+                            <Trigger Property="IsPressed" Value="true"/>
+                            <Trigger Property="IsEnabled" Value="false"/>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="Contact" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Canvas HorizontalAlignment="Stretch" Height="Auto" Margin="0,0,80.333,12" VerticalAlignment="Stretch" Width="Auto">
+                            <Viewbox Height="30.283" Width="123.798" Canvas.Left="16.959">
+                                <TextBlock x:Name="textBlock" Height="17.475" TextWrapping="Wrap" Text="Contacts" Width="52.093" FontFamily="Segoe WP N Semibold" Foreground="#FF349CE0"/>
+                            </Viewbox>
+                            <Path Stretch="Fill" Fill="#FF349CE0" Data="M 46.7521,495.389C 42.8507,495.389 41.736,493.553 40.9492,493.323L 40.9492,493.094C 42.654,492.7 42.9163,492.045 43.0146,490.897C 44.8179,492.11 46.621,492.635 48.752,491.717L 50.3913,490.897C 50.3913,491.749 50.3258,492.077 50.883,492.438C 51.2109,492.635 51.9651,493.028 52.4568,493.094C 51.6372,494.307 48.752,495.389 46.7521,495.389 Z M 49.965,501.454L 44.1293,501.454C 41.0147,501.388 38.1952,501.159 36.4248,500.864C 31.0807,499.979 30.3266,497.979 33.474,494.372C 33.7035,494.11 33.7362,494.11 34.0314,493.881C 35.8018,492.405 37.5394,492.569 40.1294,491.749C 40.5885,491.586 41.3425,491.487 41.3425,491.028C 41.3425,488.34 41.4081,489.881 40.3589,487.75C 40.195,487.422 40.0967,487.225 39.9656,486.864C 39.8016,486.405 39.8672,486.307 39.5721,485.946C 38.2608,484.34 37.9984,483.881 37.9984,481.356C 37.9984,480.865 38.1623,480.865 38.2935,480.471C 38.4574,480.012 38.3263,478.504 38.5558,477.258C 39.0803,474.045 42.1293,470.504 45.7359,470.504L 47.4078,470.504C 51.9651,470.504 55.1124,474.963 54.8502,479.914C 54.8173,480.996 55.2764,480.373 55.2764,481.586C 55.2764,483.75 54.9157,484.537 53.7026,485.946C 53.342,486.34 53.342,486.963 52.8831,487.848C 52.6863,488.209 51.9322,489.258 51.9322,489.454C 51.9322,491.684 51.4404,491.323 54.9813,492.241C 57.2107,492.799 58.9484,492.963 60.522,495.192C 61.9974,497.323 62.4236,499.061 59.7352,500.11C 57.6697,500.929 53.9322,501.323 49.965,501.454 Z M 48.8176,478.635C 49.2111,479.061 50.0306,479.75 50.5553,480.143C 51.1783,480.635 51.8339,481.029 52.6863,481.225L 53.0469,480.668C 53.2437,480.406 53.0798,480.602 53.2108,480.438C 53.2108,480.832 53.1453,480.897 53.0798,481.225C 53.7682,481.225 53.7355,481.225 53.7355,481.979C 53.7355,482.93 53.2764,484.307 52.719,484.701C 52.3913,484.963 52.424,484.799 52.2273,485.127C 52.0962,485.291 52.0307,485.651 51.9651,485.914C 51.6044,487.225 50.7192,488.569 49.7029,489.422C 46.3586,492.274 42.4245,489.881 41.1458,485.422C 40.9163,484.635 41.3097,485.225 40.7196,484.799C 39.7361,484.11 39.5393,482.897 39.5393,481.586C 39.5393,481.094 39.5065,481.553 39.6705,481.225L 40.195,481.225C 40.2278,481.717 40.5229,482.799 40.818,483.029C 40.818,481.324 40.8836,479.258 41.9654,478.078C 42.4245,477.586 42.6867,477.619 43.2769,477.357C 44.2605,478.799 48.2602,481.061 50.1291,481.225L 48.8176,478.635 Z " Height="26.368" Width="25.626"/>
+                            <Rectangle Fill="#FF349CE0" HorizontalAlignment="Stretch" Height="30.283" Margin="0" VerticalAlignment="Stretch" Width="140.757" Opacity="0" d:IsHidden="True"/>
+                        </Canvas>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true"/>
+                            <Trigger Property="IsMouseOver" Value="true"/>
+                            <Trigger Property="IsPressed" Value="true"/>
+                            <Trigger Property="IsEnabled" Value="false"/>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="list" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Canvas HorizontalAlignment="Stretch" Height="Auto" Margin="0,0,-33.911,7" VerticalAlignment="Stretch" Width="Auto" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment">
+                            <Viewbox Height="30.284" Width="97.936" Canvas.Left="40.292">
+                                <TextBlock x:Name="textBlock" Height="15.893" TextWrapping="Wrap" Text="Lists" Width="45.77" FontFamily="Segoe WP N Semibold" Foreground="#FF349CE0"/>
+                            </Viewbox>
+                            <Path Data="M10.755933,14.003004 C11.083836,14.200001 11.247636,14.527988 11.57554,14.756981 13.673861,16.3969 16.460687,16.428896 18.526106,14.756981 18.82121,14.494985 19.116314,14.166998 19.345816,14.003004 19.673719,14.233004 19.903222,14.461981 20.165522,14.724969 22.034242,16.592889 23.181753,19.707727 23.181753,22.461591 23.181753,22.822581 23.247251,22.822581 22.427644,23.018571 22.165442,23.084561 21.837539,23.182564 21.575238,23.248555 20.98513,23.37956 20.329426,23.51055&#xA;19.772017,23.608538 16.690091,24.100518 13.345957,24.133522 10.296929,23.608538 9.7067244,23.51055 9.1166155,23.37956 8.5265107,23.248555 L6.9199966,22.822581 C6.9199966,20.691688 7.2478997,19.379756 8.0019087,17.576835 8.5592105,16.330894 9.7067244,14.691981 10.755933,14.003004 z M26.329025,8.0689917 C27.345344,8.7249923 28.492967,10.297993 29.017477,11.445994 29.804393,13.150994 30.165,14.691995 30.165,16.887996 29.869894,16.887996 29.64039,17.018996 29.345384,17.084996 27.083139,17.674996 25.870016,17.805996 23.378267,18.035996 23.247064,17.510996 22.952058,16.953996 22.722554,16.494997 22.427448,15.871995 21.935738,15.150995 21.47663,14.560995 21.378428,14.428995 21.345527,14.396995 21.247225,14.297995 20.952119,13.937995 20.821017,13.806994&#xA;20.46041,13.445995 20.329207,13.346994 20.263606,13.314994 20.165304,13.215995 20.034101,13.084994 20.034101,13.084994 19.902998,12.986994 20.525911,11.773993 20.49311,11.183993 20.49311,9.8719926 20.821017,9.8719926 21.312827,10.035993 22.066941,10.035993 23.083261,10.035993 23.870077,9.7739925 24.558589,9.4129925 25.640512,8.8889923 25.870016,8.3639917 26.329025,8.0689917 z M3.9040105,8.003994 C4.3630021,8.8560796 5.9038749,9.643158 7.0185552,9.9051843 7.3464494,9.9711909 7.5103465,9.9711909 7.8709401,10.003194 8.4612297,10.102204 9.2807152,9.8721809 9.6086092,9.8721809 9.6086094,10.167211 9.57581,10.135207 9.5758097,10.397233 9.57581,11.839378 10.034802,12.397434 10.166,12.987492 10.034802,13.184512 9.9037042,13.216515 9.6086092,13.512545 8.4612297,14.65966 7.6743436,15.708765 7.0185552,17.216916 6.9202569,17.479942 6.7890592,17.708965&#xA;6.7235602,17.97099 5.0842893,17.970991 3.0189259,17.642958 1.4451537,17.249919 -0.12851858,16.856879 0.002679348,16.921886 0.002679348,16.36483 0.002679348,14.593653 0.59276867,12.593453 1.1829581,11.413336 1.8386469,10.102204 2.4615359,9.2491188 3.5106173,8.2990236 3.7073138,8.1350074 3.6417148,8.1350074 3.9040105,8.003994 z M15.018429,5.9709988 C19.149081,5.9709988 20.984971,10.920998 18.32953,13.576998 17.280394,14.592997 16.362449,14.953997 14.85434,14.953997 12.592376,14.953997 10.527,12.888998 10.527,10.461998 10.527,8.0039988 12.559578,5.9709988 15.018429,5.9709988 z M22.056089,0.014697075 C24.368587,0.055560112 26.559,1.8848171 26.559,4.5279789 26.559,6.1019816 25.640996,7.5119848 24.657394,8.199986 23.73949,8.7899871 23.083787,9.0199876 21.870684,9.0199876 21.510083,9.0199876 21.214882,8.9539876 20.887081,8.8889875 20.36248,8.7569871 20.264179,8.724987 20.133079,8.4619865 19.674078,7.4129844 19.182275,6.6919827 18.165872,6.0039816 17.674071,5.6429806 17.674071,5.8069811 17.60847,5.4129801 17.28067,3.8719769 17.903572,2.298974&#xA;18.821575,1.3479719 19.768251,0.40132904 20.926729,-0.0052595139 22.056089,0.014697075 z M8.1824509,8.0108643E-05 C8.8955214,0.0042057037 9.6086044,0.16820145 10.231539,0.49619389 11.674005,1.2171764 12.854277,3.1181307 12.657481,4.6590929 12.493585,5.9380617 12.657481,5.4460745 11.838001,6.0690589 11.215016,6.5610471 10.657629,7.1510329 10.297038,7.8720155 10.231539,8.0040121 10.002045,8.5279994 9.9364464,8.593998 9.706852,8.8559918 8.6249778,9.0199876 8.1332897,9.0199876 5.6744485,9.0199876 3.6089978,6.9540377 3.6089981,4.5280962 3.6089978,3.020133 4.3301806,1.7421637&#xA;5.4449538,0.889184 5.6744485,0.72518826 5.8711438,0.59419155 6.1334377,0.46319485 6.7563226,0.15170193 7.4693805,-0.0040445328 8.1824509,8.0108643E-05 z" Fill="#FF349CE0" Height="27.699" Stretch="Fill" Width="34.83" Canvas.Top="2.585" Canvas.Left="2.167"/>
+                            <Rectangle Fill="#FF349CE0" HorizontalAlignment="Stretch" Height="18.95" Margin="0" VerticalAlignment="Stretch" Width="86.09" Opacity="0" d:IsHidden="True"/>
+                        </Canvas>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true"/>
+                            <Trigger Property="IsMouseOver" Value="true"/>
+                            <Trigger Property="IsPressed" Value="true"/>
+                            <Trigger Property="IsEnabled" Value="false"/>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="Template" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Canvas HorizontalAlignment="Stretch" Height="Auto" Margin="0,0,80.333,12" VerticalAlignment="Stretch" Width="Auto">
+                            <Viewbox Height="30.95" Width="112.908" Canvas.Left="27.698">
+                                <TextBlock x:Name="textBlock" Height="18.667" TextWrapping="Wrap" Text="Insert template" Width="83.296" FontFamily="Segoe WP N Semibold" Foreground="#FF349CE0"/>
+                            </Viewbox>
+                            <Rectangle Fill="#FF349CE0" HorizontalAlignment="Stretch" Height="30.95" Margin="0" VerticalAlignment="Stretch" Width="140.606" Opacity="0" d:IsHidden="True"/>
+                            <Path Data="M6.2945026,21.376023 L17.638423,21.376023 C19.507126,21.376023 19.671126,23.802028 17.769523,23.802028 L6.1634027,23.802028 C5.278301,23.802028 4.8520003,23.376028 4.8520005,22.491025 4.8520003,21.835024 5.6060016,21.376023 6.2945026,21.376023 z M5.9339868,16.688017 L15.60547,16.688017 C17.048151,16.688017 17.310348,19.081017 15.244973,19.081016 L6.5239799,19.081016 C5.4749927,19.081017 4.8519992,18.753014 4.8519991,17.770015 4.8519992,17.179013 5.3438946,16.688017 5.9339868,16.688017 z M6.5240449,11.836001 L17.409235,11.836001 C19.8354,11.836001 19.310785,14.262007 17.999351,14.262007 L5.9340292,14.262007 C5.2783116,14.262007 4.8520003,13.770005 4.8520005,13.049004 4.8520003,12.163002 5.6060204,11.836001 6.5240449,11.836001 z M4.9505174,2.4260015 C3.6391392,2.4260015 2.5572572,3.3110027 2.5572572,4.590004 L2.5572572,26.327022 C2.5572572,27.638022 3.6391392,28.523024 4.9505174,28.523024 L18.982483,28.523024 C20.293861,28.523024 21.408543,27.638022 21.408543,26.327022 L21.408543,10.393008 C21.408543,8.6880074 15.605539,10.295008 14.589356,9.0820074 13.474575,7.7370062 15.343244,2.4260015 13.310678,2.4260015 z M4.360427,0 L14.490858,0 C16.064631,0 19.015182,3.3770027 19.900468,4.2620029 L22.883818,7.3440056 C23.474009,8.0320063 23.933001,8.7540069 23.933001,9.8030081 L23.933001,25.507021 C23.933001,27.114022 23.539608,28.392023 22.75272,29.277024 22.031433,30.097025 20.687255,30.949025 19.572574,30.949025 L4.360427,30.949025 C3.8030363,30.949025 2.8194528,30.556025 2.4588587,30.294024 0.72128773,29.212024 0,27.868023 0,25.507021 L0,5.4420042 C0,3.8360033 0.39339304,2.5570021 1.1802804,1.6720009 1.9015682,0.85200024 3.2456456,0 4.360427,0 z" Fill="#FF349CE0" Height="25.258" Stretch="Fill" Width="19.532" Canvas.Left="3.81"/>
+                        </Canvas>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true"/>
+                            <Trigger Property="IsMouseOver" Value="true"/>
+                            <Trigger Property="IsPressed" Value="true"/>
+                            <Trigger Property="IsEnabled" Value="false"/>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="cmd_login" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <ControlTemplate.Resources>
+                            <Storyboard x:Key="in_enter">
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="grid">
+                                    <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="1.2"/>
+                                </DoubleAnimationUsingKeyFrames>
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="grid">
+                                    <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="1.2"/>
+                                </DoubleAnimationUsingKeyFrames>
+                            </Storyboard>
+                            <Storyboard x:Key="out_enter">
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="grid">
+                                    <EasingDoubleKeyFrame KeyTime="0" Value="1.2"/>
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="1"/>
+                                </DoubleAnimationUsingKeyFrames>
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="grid">
+                                    <EasingDoubleKeyFrame KeyTime="0" Value="1.2"/>
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="1"/>
+                                </DoubleAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </ControlTemplate.Resources>
+                        <Grid x:Name="grid" Height="Auto" Width="Auto" Margin="0,0,0.632,-1.97" RenderTransformOrigin="0.5,0.5">
+                            <Grid.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </Grid.RenderTransform>
+
+                            <Path StrokeThickness="1.0" Stroke="#ff808284" StrokeMiterLimit="1.0" Data="F1 M 635.045,380.046 L 705.234,380.046 C 714.863,380.046 722.868,388.051 722.868,397.796 L 722.868,397.796 C 722.868,407.425 714.863,415.430 705.234,415.430 L 635.045,415.430 C 625.416,415.430 617.411,407.425 617.411,397.796 L 617.411,397.796 C 617.411,388.051 625.416,380.046 635.045,380.046 L 635.045,380.046 Z" HorizontalAlignment="Left" Margin="-617,-377,0,0" VerticalAlignment="Top"/>
+
+                            <Path Fill="#ff68cef4" Data=" M 700.245,389.095 C 705.118,389.095 708.946,392.923 708.946,397.796 C 708.946,402.553 705.118,406.497 700.245,406.497 C 695.488,406.497 691.544,402.553 691.544,397.796 C 691.544,392.923 695.488,389.095 700.245,389.095 L 700.245,389.095 Z" Margin="-617,-377,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                            <Path Fill="#ffffffff" Data=" M 693.980,399.420 L 702.913,399.420 L 702.913,402.205 L 704.770,400.000 L 706.626,397.796 L 704.770,395.476 L 702.913,393.271 L 702.913,396.056 L 693.980,396.056 L 693.980,399.420 Z" Margin="-617,-377,17.742,16.725" d:LayoutOverrides="Width, Height"/>
+                            <Rectangle Fill="#ffef3f43" HorizontalAlignment="Stretch" Margin="0,-0.439,1,0" Width="Auto" Opacity="0"/>
+                            <TextBlock TextAlignment="Left" FontFamily="Century Gothic" FontSize="16" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="372.25,-892.25,-310.396,0" d:LayoutOverrides="VerticalAlignment">
+                                <TextBlock.RenderTransform>
+                                    <TransformGroup>
+                                        <MatrixTransform Matrix="1.33333,0,0,1.33333,-362.045,901.103"/>
+                                    </TransformGroup>
+                                </TextBlock.RenderTransform><Run Text="ENTER" Foreground="#FF221F20"/></TextBlock>
+
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <EventTrigger RoutedEvent="UIElement.MouseEnter" SourceName="grid">
+                                <BeginStoryboard x:Name="in_enter_BeginStoryboard" Storyboard="{StaticResource in_enter}"/>
+                            </EventTrigger>
+                            <EventTrigger RoutedEvent="UIElement.MouseLeave" SourceName="grid">
+                                <BeginStoryboard x:Name="out_enter_BeginStoryboard" Storyboard="{StaticResource out_enter}"/>
+                            </EventTrigger>
+                            <Trigger Property="IsDefaulted" Value="true"/>
+                            <Trigger Property="IsMouseOver" Value="true"/>
+                            <Trigger Property="IsPressed" Value="true"/>
+                            <Trigger Property="IsEnabled" Value="false"/>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="Send" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <ControlTemplate.Resources>
+                            <Storyboard x:Key="in_enter">
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="grid">
+                                    <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="1.2"/>
+                                </DoubleAnimationUsingKeyFrames>
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="grid">
+                                    <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="1.2"/>
+                                </DoubleAnimationUsingKeyFrames>
+                            </Storyboard>
+                            <Storyboard x:Key="out_enter">
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="grid">
+                                    <EasingDoubleKeyFrame KeyTime="0" Value="1.2"/>
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="1"/>
+                                </DoubleAnimationUsingKeyFrames>
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="grid">
+                                    <EasingDoubleKeyFrame KeyTime="0" Value="1.2"/>
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="1"/>
+                                </DoubleAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </ControlTemplate.Resources>
+                        <Grid x:Name="grid" Height="Auto" Width="Auto" Margin="0,0,0.632,-1.97" RenderTransformOrigin="0.5,0.5">
+                            <Grid.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </Grid.RenderTransform>
+
+                            <Path StrokeThickness="1.0" Stroke="#ff808284" StrokeMiterLimit="1.0" Data="F1 M 635.045,380.046 L 705.234,380.046 C 714.863,380.046 722.868,388.051 722.868,397.796 L 722.868,397.796 C 722.868,407.425 714.863,415.430 705.234,415.430 L 635.045,415.430 C 625.416,415.430 617.411,407.425 617.411,397.796 L 617.411,397.796 C 617.411,388.051 625.416,380.046 635.045,380.046 L 635.045,380.046 Z" HorizontalAlignment="Left" Margin="-617,-377,0,0" VerticalAlignment="Top"/>
+
+                            <Path Fill="#ff68cef4" Data=" M 700.245,389.095 C 705.118,389.095 708.946,392.923 708.946,397.796 C 708.946,402.553 705.118,406.497 700.245,406.497 C 695.488,406.497 691.544,402.553 691.544,397.796 C 691.544,392.923 695.488,389.095 700.245,389.095 L 700.245,389.095 Z" Margin="-617,-377,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                            <Path Fill="#ffffffff" Data=" M 693.980,399.420 L 702.913,399.420 L 702.913,402.205 L 704.770,400.000 L 706.626,397.796 L 704.770,395.476 L 702.913,393.271 L 702.913,396.056 L 693.980,396.056 L 693.980,399.420 Z" Margin="-617,-377,17.742,16.725" d:LayoutOverrides="Width, Height"/>
+                            <Rectangle Fill="#ffef3f43" HorizontalAlignment="Stretch" Margin="0,-0.439,1,0" Width="Auto" Opacity="0"/>
+                            <TextBlock TextAlignment="Left" FontFamily="Century Gothic" FontSize="16" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="372.25,-892.25,-310.396,0" d:LayoutOverrides="VerticalAlignment">
+                                <TextBlock.RenderTransform>
+                                    <TransformGroup>
+                                        <MatrixTransform Matrix="1.33333,0,0,1.33333,-362.045,901.103"/>
+                                    </TransformGroup>
+                                </TextBlock.RenderTransform><Run Foreground="#FF221F20" Text="SEND"/></TextBlock>
+
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <EventTrigger RoutedEvent="UIElement.MouseEnter" SourceName="grid">
+                                <BeginStoryboard x:Name="in_enter_BeginStoryboard" Storyboard="{StaticResource in_enter}"/>
+                            </EventTrigger>
+                            <EventTrigger RoutedEvent="UIElement.MouseLeave" SourceName="grid">
+                                <BeginStoryboard x:Name="out_enter_BeginStoryboard" Storyboard="{StaticResource out_enter}"/>
+                            </EventTrigger>
+                            <Trigger Property="IsDefaulted" Value="true"/>
+                            <Trigger Property="IsMouseOver" Value="true"/>
+                            <Trigger Property="IsPressed" Value="true"/>
+                            <Trigger Property="IsEnabled" Value="false"/>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+
+    <Grid>
+        <ListView x:Name="list_view" Margin="152.195,62.5,193.282,0" ItemsSource="{Binding}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" IsSynchronizedWithCurrentItem="True" Height="170.5" VerticalAlignment="Top" Background="#FFE2E0E0" >
+
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemTemplate>
+
+                <DataTemplate>
+                    <StackPanel Orientation="Vertical">
+                        <Viewbox Height="33.137" Margin="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="151.08" Cursor="Hand">
+                            <Canvas x:Name="canvas" Width="290.413" Height="63.6981">
+                                <Path x:Name="path" Width="290.413" Height="63.6981" Canvas.Left="0" Canvas.Top="0" Stretch="Fill" Fill="#FF8B8B8B" Data="M 31.8486,0L 258.564,0C 276.072,0 290.413,14.333 290.413,31.83L 290.413,31.83C 290.413,49.3651 276.072,63.6981 258.564,63.6981L 31.8486,63.6981C 14.3414,63.6981 0,49.3651 0,31.83L 0,31.83C 0,14.333 14.3414,0 31.8486,0 Z "/>
+                                <TextBlock x:Name="txt_phone" TextAlignment="Left" FontFamily="Century Gothic" FontSize="24.4734" VerticalAlignment="Top" HorizontalAlignment="Left">
+                                    <TextBlock.RenderTransform>
+                                        <TransformGroup>
+                                            <MatrixTransform Matrix="1.33333,0,0,1.33333,25.8698,9.87751"/>
+                                        </TransformGroup>
+                                    </TextBlock.RenderTransform><Run Text="{Binding Phone}" Foreground="#FF221F20"/></TextBlock>
+                                <Button x:Name="cmd_remove" Content="Button" Height="37.968" Canvas.Left="243.218" Canvas.Top="12.846" Width="40.024" Style="{DynamicResource ButtonStyle1}" Click="cmd_remove_Click"/>
+                            </Canvas>
+                        </Viewbox>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+            <ListView.ItemContainerStyle>
+                <Style TargetType="{x:Type ListBoxItem}">
+                    <Style.Resources>
+                        <!-- With focus -->
+                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}"
+                                 Color="Transparent" />
+                        <!-- Without focus -->
+                        <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}"
+                                 Color="Transparent" />
+                        <!-- Text foreground -->
+                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}"
+                                 Color="Black" />
+                    </Style.Resources>
+                    <Setter Property="FocusVisualStyle" Value="{x:Null}"></Setter>
+                </Style>
+            </ListView.ItemContainerStyle>
+
+        </ListView>
+        <TextBlock TextAlignment="Left" FontFamily="Arial" FontSize="18.667" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="-1620.001,-420.334,0,0">
+            <TextBlock.RenderTransform>
+                <TransformGroup>
+                    <MatrixTransform Matrix="1.33333,0,0,1.33333,1728.71,484.402"/>
+                </TransformGroup>
+            </TextBlock.RenderTransform><Run Text="To:" Foreground="#FF000000"/></TextBlock>
+        <RichTextBox x:Name="txt_message" Height="147" Margin="152.195,0,193.282,123.5" VerticalAlignment="Bottom" FontFamily="Arial" FontSize="16">
+            <FlowDocument>
+                <Paragraph>
+                    <Run Text="text"/>
+                </Paragraph>
+            </FlowDocument>
+        </RichTextBox>
+        <TextBlock TextAlignment="Left" FontFamily="Arial" FontSize="18.667" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="-1694.001,-192.334,0,0">
+            <TextBlock.RenderTransform>
+                <TransformGroup>
+                    <MatrixTransform Matrix="1.33333,0,0,1.33333,1728.71,484.402"/>
+                </TransformGroup>
+            </TextBlock.RenderTransform><Run Foreground="Black" Text="Message:"/></TextBlock>
+        <Button x:Name="cmd_contact" Content="Button" HorizontalAlignment="Right" Margin="0,72.504,25.334,0" Width="132.089" Style="{DynamicResource Contact}" Cursor="Hand" RenderTransformOrigin="0.5,0.5" Height="30" VerticalAlignment="Top" Click="cmd_contact_Click">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
+        <Button x:Name="cmd_lists" Content="Button" HorizontalAlignment="Right" Margin="0,120.504,53.106,0" Width="104.317" Style="{DynamicResource list}" Cursor="Hand" RenderTransformOrigin="0.5,0.5" Height="37.284" VerticalAlignment="Top">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
+        <Button x:Name="cmd_insert_template" Content="Button" HorizontalAlignment="Right" Margin="0,0,25.334,228.879" Width="142.089" Style="{DynamicResource Template}" Cursor="Hand" RenderTransformOrigin="0.5,0.5" Height="30.617" VerticalAlignment="Bottom" Click="cmd_insert_template_Click">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
+        <Button x:Name="cmd_send" Content="Button" Width="108" Height="39.96" Style="{DynamicResource Send}" Background="{x:Null}" Cursor="Hand" HorizontalAlignment="Right" Margin="0,0,193.282,36.267" VerticalAlignment="Bottom" Click="cmd_send_Click"/>
+
+
+    </Grid>
+</Page>

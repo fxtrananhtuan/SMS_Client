@@ -1,0 +1,567 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="DesktopEndpoint" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="NetTcpBinding_IDesktopEndpoint_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1">
+        </msb:BinaryEncoding>
+        <wsaw:UsingAddressing>
+        </wsaw:UsingAddressing>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import namespace="http://tempuri.org/" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/DTO" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IDesktopEndpoint_Insert_InputMessage">
+    <wsdl:part name="parameters" element="tns:Insert" />
+  </wsdl:message>
+  <wsdl:message name="IDesktopEndpoint_Insert_OutputMessage">
+    <wsdl:part name="parameters" element="tns:InsertResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDesktopEndpoint_Update_InputMessage">
+    <wsdl:part name="parameters" element="tns:Update" />
+  </wsdl:message>
+  <wsdl:message name="IDesktopEndpoint_Update_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDesktopEndpoint_RandomID_InputMessage">
+    <wsdl:part name="parameters" element="tns:RandomID" />
+  </wsdl:message>
+  <wsdl:message name="IDesktopEndpoint_RandomID_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RandomIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDesktopEndpoint_CheckSignin_InputMessage">
+    <wsdl:part name="parameters" element="tns:CheckSignin" />
+  </wsdl:message>
+  <wsdl:message name="IDesktopEndpoint_CheckSignin_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CheckSigninResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDesktopEndpoint_GetID_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetID" />
+  </wsdl:message>
+  <wsdl:message name="IDesktopEndpoint_GetID_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDesktopEndpoint_GetName_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetName" />
+  </wsdl:message>
+  <wsdl:message name="IDesktopEndpoint_GetName_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDesktopEndpoint_load_Customer_InputMessage">
+    <wsdl:part name="parameters" element="tns:load_Customer" />
+  </wsdl:message>
+  <wsdl:message name="IDesktopEndpoint_load_Customer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:load_CustomerResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDesktopEndpoint_Insert_Customer_InputMessage">
+    <wsdl:part name="parameters" element="tns:Insert_Customer" />
+  </wsdl:message>
+  <wsdl:message name="IDesktopEndpoint_Insert_Customer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Insert_CustomerResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDesktopEndpoint_Delete_Customer_InputMessage">
+    <wsdl:part name="parameters" element="tns:Delete_Customer" />
+  </wsdl:message>
+  <wsdl:message name="IDesktopEndpoint_Delete_Customer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Delete_CustomerResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDesktopEndpoint_Update_Customer_InputMessage">
+    <wsdl:part name="parameters" element="tns:Update_Customer" />
+  </wsdl:message>
+  <wsdl:message name="IDesktopEndpoint_Update_Customer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Update_CustomerResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDesktopEndpoint_RandomID_Customer_InputMessage">
+    <wsdl:part name="parameters" element="tns:RandomID_Customer" />
+  </wsdl:message>
+  <wsdl:message name="IDesktopEndpoint_RandomID_Customer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RandomID_CustomerResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDesktopEndpoint_SMSID_InputMessage">
+    <wsdl:part name="parameters" element="tns:SMSID" />
+  </wsdl:message>
+  <wsdl:message name="IDesktopEndpoint_SMSID_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SMSIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDesktopEndpoint_SendSMS_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendSMS" />
+  </wsdl:message>
+  <wsdl:message name="IDesktopEndpoint_SendSMS_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SendSMSResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDesktopEndpoint_Load_Schedule_InputMessage">
+    <wsdl:part name="parameters" element="tns:Load_Schedule" />
+  </wsdl:message>
+  <wsdl:message name="IDesktopEndpoint_Load_Schedule_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Load_ScheduleResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDesktopEndpoint_Insert_Schedule_InputMessage">
+    <wsdl:part name="parameters" element="tns:Insert_Schedule" />
+  </wsdl:message>
+  <wsdl:message name="IDesktopEndpoint_Insert_Schedule_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Insert_ScheduleResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDesktopEndpoint_Delete_Schedule_InputMessage">
+    <wsdl:part name="parameters" element="tns:Delete_Schedule" />
+  </wsdl:message>
+  <wsdl:message name="IDesktopEndpoint_Delete_Schedule_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Delete_ScheduleResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDesktopEndpoint_Update_Schedule_InputMessage">
+    <wsdl:part name="parameters" element="tns:Update_Schedule" />
+  </wsdl:message>
+  <wsdl:message name="IDesktopEndpoint_Update_Schedule_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Update_ScheduleResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDesktopEndpoint_RandomID_Schedule_InputMessage">
+    <wsdl:part name="parameters" element="tns:RandomID_Schedule" />
+  </wsdl:message>
+  <wsdl:message name="IDesktopEndpoint_RandomID_Schedule_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RandomID_ScheduleResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDesktopEndpoint_Load_Group_InputMessage">
+    <wsdl:part name="parameters" element="tns:Load_Group" />
+  </wsdl:message>
+  <wsdl:message name="IDesktopEndpoint_Load_Group_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Load_GroupResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDesktopEndpoint_Insert_Group_InputMessage">
+    <wsdl:part name="parameters" element="tns:Insert_Group" />
+  </wsdl:message>
+  <wsdl:message name="IDesktopEndpoint_Insert_Group_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Insert_GroupResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDesktopEndpoint_Delete_Group_InputMessage">
+    <wsdl:part name="parameters" element="tns:Delete_Group" />
+  </wsdl:message>
+  <wsdl:message name="IDesktopEndpoint_Delete_Group_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Delete_GroupResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDesktopEndpoint_Update_Group_InputMessage">
+    <wsdl:part name="parameters" element="tns:Update_Group" />
+  </wsdl:message>
+  <wsdl:message name="IDesktopEndpoint_Update_Group_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Update_GroupResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDesktopEndpoint_RandomID_Group_InputMessage">
+    <wsdl:part name="parameters" element="tns:RandomID_Group" />
+  </wsdl:message>
+  <wsdl:message name="IDesktopEndpoint_RandomID_Group_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RandomID_GroupResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDesktopEndpoint_Load_Template_InputMessage">
+    <wsdl:part name="parameters" element="tns:Load_Template" />
+  </wsdl:message>
+  <wsdl:message name="IDesktopEndpoint_Load_Template_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Load_TemplateResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDesktopEndpoint_Insert_Template_InputMessage">
+    <wsdl:part name="parameters" element="tns:Insert_Template" />
+  </wsdl:message>
+  <wsdl:message name="IDesktopEndpoint_Insert_Template_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Insert_TemplateResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDesktopEndpoint_Delete_Template_InputMessage">
+    <wsdl:part name="parameters" element="tns:Delete_Template" />
+  </wsdl:message>
+  <wsdl:message name="IDesktopEndpoint_Delete_Template_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Delete_TemplateResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDesktopEndpoint_Update_Template_InputMessage">
+    <wsdl:part name="parameters" element="tns:Update_Template" />
+  </wsdl:message>
+  <wsdl:message name="IDesktopEndpoint_Update_Template_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Update_TemplateResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDesktopEndpoint_RandomID_Template_InputMessage">
+    <wsdl:part name="parameters" element="tns:RandomID_Template" />
+  </wsdl:message>
+  <wsdl:message name="IDesktopEndpoint_RandomID_Template_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RandomID_TemplateResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IDesktopEndpoint">
+    <wsdl:operation name="Insert">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDesktopEndpoint/Insert" message="tns:IDesktopEndpoint_Insert_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDesktopEndpoint/InsertResponse" message="tns:IDesktopEndpoint_Insert_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Update">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDesktopEndpoint/Update" message="tns:IDesktopEndpoint_Update_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDesktopEndpoint/UpdateResponse" message="tns:IDesktopEndpoint_Update_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RandomID">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDesktopEndpoint/RandomID" message="tns:IDesktopEndpoint_RandomID_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDesktopEndpoint/RandomIDResponse" message="tns:IDesktopEndpoint_RandomID_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckSignin">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDesktopEndpoint/CheckSignin" message="tns:IDesktopEndpoint_CheckSignin_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDesktopEndpoint/CheckSigninResponse" message="tns:IDesktopEndpoint_CheckSignin_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetID">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDesktopEndpoint/GetID" message="tns:IDesktopEndpoint_GetID_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDesktopEndpoint/GetIDResponse" message="tns:IDesktopEndpoint_GetID_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetName">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDesktopEndpoint/GetName" message="tns:IDesktopEndpoint_GetName_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDesktopEndpoint/GetNameResponse" message="tns:IDesktopEndpoint_GetName_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="load_Customer">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDesktopEndpoint/load_Customer" message="tns:IDesktopEndpoint_load_Customer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDesktopEndpoint/load_CustomerResponse" message="tns:IDesktopEndpoint_load_Customer_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Insert_Customer">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDesktopEndpoint/Insert_Customer" message="tns:IDesktopEndpoint_Insert_Customer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDesktopEndpoint/Insert_CustomerResponse" message="tns:IDesktopEndpoint_Insert_Customer_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Delete_Customer">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDesktopEndpoint/Delete_Customer" message="tns:IDesktopEndpoint_Delete_Customer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDesktopEndpoint/Delete_CustomerResponse" message="tns:IDesktopEndpoint_Delete_Customer_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Update_Customer">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDesktopEndpoint/Update_Customer" message="tns:IDesktopEndpoint_Update_Customer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDesktopEndpoint/Update_CustomerResponse" message="tns:IDesktopEndpoint_Update_Customer_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RandomID_Customer">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDesktopEndpoint/RandomID_Customer" message="tns:IDesktopEndpoint_RandomID_Customer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDesktopEndpoint/RandomID_CustomerResponse" message="tns:IDesktopEndpoint_RandomID_Customer_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SMSID">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDesktopEndpoint/SMSID" message="tns:IDesktopEndpoint_SMSID_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDesktopEndpoint/SMSIDResponse" message="tns:IDesktopEndpoint_SMSID_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SendSMS">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDesktopEndpoint/SendSMS" message="tns:IDesktopEndpoint_SendSMS_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDesktopEndpoint/SendSMSResponse" message="tns:IDesktopEndpoint_SendSMS_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Load_Schedule">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDesktopEndpoint/Load_Schedule" message="tns:IDesktopEndpoint_Load_Schedule_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDesktopEndpoint/Load_ScheduleResponse" message="tns:IDesktopEndpoint_Load_Schedule_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Insert_Schedule">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDesktopEndpoint/Insert_Schedule" message="tns:IDesktopEndpoint_Insert_Schedule_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDesktopEndpoint/Insert_ScheduleResponse" message="tns:IDesktopEndpoint_Insert_Schedule_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Delete_Schedule">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDesktopEndpoint/Delete_Schedule" message="tns:IDesktopEndpoint_Delete_Schedule_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDesktopEndpoint/Delete_ScheduleResponse" message="tns:IDesktopEndpoint_Delete_Schedule_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Update_Schedule">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDesktopEndpoint/Update_Schedule" message="tns:IDesktopEndpoint_Update_Schedule_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDesktopEndpoint/Update_ScheduleResponse" message="tns:IDesktopEndpoint_Update_Schedule_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RandomID_Schedule">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDesktopEndpoint/RandomID_Schedule" message="tns:IDesktopEndpoint_RandomID_Schedule_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDesktopEndpoint/RandomID_ScheduleResponse" message="tns:IDesktopEndpoint_RandomID_Schedule_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Load_Group">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDesktopEndpoint/Load_Group" message="tns:IDesktopEndpoint_Load_Group_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDesktopEndpoint/Load_GroupResponse" message="tns:IDesktopEndpoint_Load_Group_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Insert_Group">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDesktopEndpoint/Insert_Group" message="tns:IDesktopEndpoint_Insert_Group_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDesktopEndpoint/Insert_GroupResponse" message="tns:IDesktopEndpoint_Insert_Group_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Delete_Group">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDesktopEndpoint/Delete_Group" message="tns:IDesktopEndpoint_Delete_Group_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDesktopEndpoint/Delete_GroupResponse" message="tns:IDesktopEndpoint_Delete_Group_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Update_Group">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDesktopEndpoint/Update_Group" message="tns:IDesktopEndpoint_Update_Group_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDesktopEndpoint/Update_GroupResponse" message="tns:IDesktopEndpoint_Update_Group_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RandomID_Group">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDesktopEndpoint/RandomID_Group" message="tns:IDesktopEndpoint_RandomID_Group_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDesktopEndpoint/RandomID_GroupResponse" message="tns:IDesktopEndpoint_RandomID_Group_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Load_Template">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDesktopEndpoint/Load_Template" message="tns:IDesktopEndpoint_Load_Template_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDesktopEndpoint/Load_TemplateResponse" message="tns:IDesktopEndpoint_Load_Template_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Insert_Template">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDesktopEndpoint/Insert_Template" message="tns:IDesktopEndpoint_Insert_Template_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDesktopEndpoint/Insert_TemplateResponse" message="tns:IDesktopEndpoint_Insert_Template_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Delete_Template">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDesktopEndpoint/Delete_Template" message="tns:IDesktopEndpoint_Delete_Template_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDesktopEndpoint/Delete_TemplateResponse" message="tns:IDesktopEndpoint_Delete_Template_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Update_Template">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDesktopEndpoint/Update_Template" message="tns:IDesktopEndpoint_Update_Template_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDesktopEndpoint/Update_TemplateResponse" message="tns:IDesktopEndpoint_Update_Template_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RandomID_Template">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDesktopEndpoint/RandomID_Template" message="tns:IDesktopEndpoint_RandomID_Template_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDesktopEndpoint/RandomID_TemplateResponse" message="tns:IDesktopEndpoint_RandomID_Template_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="NetTcpBinding_IDesktopEndpoint" type="tns:IDesktopEndpoint">
+    <wsp:PolicyReference URI="#NetTcpBinding_IDesktopEndpoint_policy">
+    </wsp:PolicyReference>
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="Insert">
+      <soap12:operation soapAction="http://tempuri.org/IDesktopEndpoint/Insert" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Update">
+      <soap12:operation soapAction="http://tempuri.org/IDesktopEndpoint/Update" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RandomID">
+      <soap12:operation soapAction="http://tempuri.org/IDesktopEndpoint/RandomID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckSignin">
+      <soap12:operation soapAction="http://tempuri.org/IDesktopEndpoint/CheckSignin" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetID">
+      <soap12:operation soapAction="http://tempuri.org/IDesktopEndpoint/GetID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetName">
+      <soap12:operation soapAction="http://tempuri.org/IDesktopEndpoint/GetName" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="load_Customer">
+      <soap12:operation soapAction="http://tempuri.org/IDesktopEndpoint/load_Customer" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Insert_Customer">
+      <soap12:operation soapAction="http://tempuri.org/IDesktopEndpoint/Insert_Customer" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delete_Customer">
+      <soap12:operation soapAction="http://tempuri.org/IDesktopEndpoint/Delete_Customer" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Update_Customer">
+      <soap12:operation soapAction="http://tempuri.org/IDesktopEndpoint/Update_Customer" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RandomID_Customer">
+      <soap12:operation soapAction="http://tempuri.org/IDesktopEndpoint/RandomID_Customer" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SMSID">
+      <soap12:operation soapAction="http://tempuri.org/IDesktopEndpoint/SMSID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendSMS">
+      <soap12:operation soapAction="http://tempuri.org/IDesktopEndpoint/SendSMS" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Load_Schedule">
+      <soap12:operation soapAction="http://tempuri.org/IDesktopEndpoint/Load_Schedule" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Insert_Schedule">
+      <soap12:operation soapAction="http://tempuri.org/IDesktopEndpoint/Insert_Schedule" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delete_Schedule">
+      <soap12:operation soapAction="http://tempuri.org/IDesktopEndpoint/Delete_Schedule" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Update_Schedule">
+      <soap12:operation soapAction="http://tempuri.org/IDesktopEndpoint/Update_Schedule" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RandomID_Schedule">
+      <soap12:operation soapAction="http://tempuri.org/IDesktopEndpoint/RandomID_Schedule" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Load_Group">
+      <soap12:operation soapAction="http://tempuri.org/IDesktopEndpoint/Load_Group" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Insert_Group">
+      <soap12:operation soapAction="http://tempuri.org/IDesktopEndpoint/Insert_Group" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delete_Group">
+      <soap12:operation soapAction="http://tempuri.org/IDesktopEndpoint/Delete_Group" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Update_Group">
+      <soap12:operation soapAction="http://tempuri.org/IDesktopEndpoint/Update_Group" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RandomID_Group">
+      <soap12:operation soapAction="http://tempuri.org/IDesktopEndpoint/RandomID_Group" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Load_Template">
+      <soap12:operation soapAction="http://tempuri.org/IDesktopEndpoint/Load_Template" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Insert_Template">
+      <soap12:operation soapAction="http://tempuri.org/IDesktopEndpoint/Insert_Template" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delete_Template">
+      <soap12:operation soapAction="http://tempuri.org/IDesktopEndpoint/Delete_Template" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Update_Template">
+      <soap12:operation soapAction="http://tempuri.org/IDesktopEndpoint/Update_Template" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RandomID_Template">
+      <soap12:operation soapAction="http://tempuri.org/IDesktopEndpoint/RandomID_Template" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="DesktopEndpoint">
+    <wsdl:port name="NetTcpBinding_IDesktopEndpoint" binding="tns:NetTcpBinding_IDesktopEndpoint">
+      <soap12:address location="net.tcp://localhost:9000/desktop_services" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:9000/desktop_services</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
